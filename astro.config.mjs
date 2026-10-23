@@ -1,12 +1,15 @@
 // docs.dugganusa.com: Astro Starlight. Left nav = the integration lanes a customer actually wires.
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightLlmsTxt from 'starlight-llms-txt';
 
 export default defineConfig({
   site: 'https://docs.dugganusa.com',
   integrations: [
     starlight({
       title: 'DugganUSA Docs',
+      // /llms.txt, /llms-full.txt, /llms-small.txt: the docs as Markdown for AI assistants and agents.
+      plugins: [starlightLlmsTxt({ projectName: 'DugganUSA', description: 'Threat-intelligence feeds, search, and pre-flight checks (check-package, Dredd) for AI agents. One API key; send it as Authorization: Bearer.' })],
       description: 'Threat-intelligence feeds, search, and pre-flight checks for AI agents: how to integrate.',
       logo: { src: './src/assets/mark.svg', replacesTitle: false },
       favicon: '/favicon.svg',
