@@ -28,6 +28,7 @@ export default defineConfig({
         { label: 'Search & enrichment', items: [{ autogenerate: { directory: 'search' } }] },
         { label: 'Agent security (MCP)', items: [{ autogenerate: { directory: 'agents' } }] },
         { label: 'Account & keys', items: [{ autogenerate: { directory: 'account' } }] },
+        { label: 'Research', items: [{ autogenerate: { directory: 'research' } }] },
         { label: 'Reference', items: ['reference/endpoints', 'changelog'] },
       ],
     }),
