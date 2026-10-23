@@ -1,0 +1,35 @@
+---
+title: DugganUSA developer docs
+description: Integrate DugganUSA threat-intelligence feeds, search and agent pre-flight checks into your firewall, SIEM, CI pipeline or AI agent.
+template: splash
+hero:
+  tagline: Threat-intelligence feeds, search and pre-flight checks for AI agents. One API key works everywhere.
+  actions:
+    - text: Quickstart
+      link: /quickstart/
+      icon: right-arrow
+    - text: Get a free key
+      link: https://analytics.dugganusa.com/stix/register
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## Pick your integration
+
+<CardGrid>
+  <LinkCard title="Blocklists (CSV)" description="IPs, domains, URLs, hashes and malicious packages as plain CSV for firewalls and scripts." href="/feed/csv-blocklists/" />
+  <LinkCard title="STIX 2.1 and TAXII 2.1" description="A standard feed for Microsoft Sentinel, OpenCTI, MISP and any TAXII client." href="/feed/taxii/" />
+  <LinkCard title="Firewalls and IDS" description="OPNsense URL tables, Suricata rules, an Unbound DNS blocklist and a Cloudflare Worker." href="/firewall/opnsense/" />
+  <LinkCard title="SIEM and detection" description="Sentinel, Splunk, and Sigma, YARA, KQL and SPL rule exports." href="/siem/sentinel/" />
+  <LinkCard title="Search and enrichment" description="Look up an IP, domain, hash or actor across the corpus." href="/search/search/" />
+  <LinkCard title="Agent security (MCP)" description="Two MCP servers: threat-intel lookups, and a pre-flight verdict before an agent installs or connects." href="/agents/jeevesus/" />
+</CardGrid>
+
+## What every integration has in common
+
+- **One key.** The same `dugusa_` key works for the feed, the API, both MCP servers, the Edge Shield worker and the Checks Action.
+- **Send it in a header.** `Authorization: Bearer <key>`. Keys in URLs end up in logs. See [Authentication](/authentication/).
+- **Read-only.** Nothing you call changes anything on your side. You pull; you decide what to block.
+- **You set the threshold.** Every indicator carries a confidence score from 0 to 95. Filter with `min_confidence`.
