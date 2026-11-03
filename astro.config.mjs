@@ -24,7 +24,7 @@ export default defineConfig({
         { tag: 'link', attrs: { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap' } },
       ],
       sidebar: [
-        { label: 'Get started', items: ['index', 'quickstart', 'authentication', 'rate-limits', 'errors'] },
+        { label: 'Get started', items: ['index', 'quickstart', 'faq', 'authentication', 'rate-limits', 'errors'] },
         { label: 'Threat-intel feed', items: [{ autogenerate: { directory: 'feed' } }] },
         { label: 'Firewalls & IDS', items: [{ autogenerate: { directory: 'firewall' } }] },
         { label: 'SIEM & detection', items: [{ autogenerate: { directory: 'siem' } }] },
