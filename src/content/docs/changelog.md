@@ -5,6 +5,12 @@ description: Changes to the API, feeds and MCP servers that affect integrations.
 
 Corrections, including our own mistakes, are also published at [analytics.dugganusa.com/updates](https://analytics.dugganusa.com/updates).
 
+## 2026-11-07
+
+- **Detection rules corrected.** Five catalog rules did not do what they said: 007 (a keyword-count filter that never filtered), 011 (an `OR` that matched driver-service events from any index), 012 (a score filter equal to the lowest score), 016 (the file-creation clause was discarded by the final filter) and 017 (`=` where `==` belongs). Six Sigma thresholds written as quoted text are now numeric comparisons. If you copied these rules earlier, pull them again. Found by Matt Lucas at RedEye Security while translating the catalog for Caver.
+- **Detection rules: SQL over OCSF.** Every rule now has a `sql` field and `?format=sql` on the export route. The detection logic is tested; the OCSF mapping and the SQL dialect have not been run on a lakehouse engine.
+- **Caver** has an integration page: [Caver](/siem/caver/).
+
 ## 2026-10-23
 
 - **check-package** answers `review` for versions below a security fix that shipped without an advisory, and says which version fixes it. First entries: the `@x402/*` npm packages below 2.23.0.

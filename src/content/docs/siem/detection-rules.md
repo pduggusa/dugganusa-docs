@@ -1,6 +1,6 @@
 ---
 title: Detection rules
-description: A keyless catalog of detection rules exportable as Sigma, SPL, KQL or JSON, plus keyed generators that build YARA, Sigma and Suricata rules from live indicators.
+description: A keyless catalog of detection rules exportable as Sigma, SPL, KQL, SQL over OCSF or JSON, plus keyed generators that build YARA, Sigma and Suricata rules from live indicators.
 sidebar:
   order: 3
 ---
@@ -9,7 +9,7 @@ Two kinds of rules:
 
 | Kind | Endpoints | Key |
 |---|---|---|
-| **Catalog**: hand-written detections, each available as Sigma, Splunk SPL, KQL and JSON | `/api/v1/detection-rules`, `/api/v1/detection-rules/:id`, `/api/v1/detection-rules/:id/export` | Not required |
+| **Catalog**: hand-written detections, each available as Sigma, Splunk SPL, KQL, SQL over OCSF and JSON | `/api/v1/detection-rules`, `/api/v1/detection-rules/:id`, `/api/v1/detection-rules/:id/export` | Not required |
 | **Generators**: rules built on request from current indicators | `/api/v1/detection-rules/yara`, `/sigma/ioc`, `/suricata`, `/bundle` | Required |
 
 ## Catalog
@@ -68,7 +68,10 @@ Filter with one of these query parameters. If you pass more than one, only the l
 | `sigma` (default) | `text/yaml` | `.yml` |
 | `splunk` | `text/plain` | `.spl` |
 | `kql` | `text/plain` | `.kql` |
+| `sql` | `text/plain` | `.sql` |
 | `json` | `application/json` | `.json` |
+
+`sql` is a DuckDB-style query over OCSF classes: a first CTE maps OCSF paths to flat columns, and the detection logic runs over those columns. We test the logic against a matching and a non-matching row for every rule; we have not run the OCSF mapping or the SQL on a lakehouse engine, so expect to adjust the first CTE. Lookups that SPL did with `lookup` are tables named `lk_*` that you create. Each rule object in the list and single-rule responses also carries `sql` and `sqlMeta` (OCSF class, lookup tables, dialect note).
 
 The response is the rule body only, sent as an attachment named `dugganusa-<id>.<extension>`. An unknown id or format returns `404`.
 
