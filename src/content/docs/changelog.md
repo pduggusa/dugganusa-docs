@@ -7,7 +7,7 @@ Corrections, including our own mistakes, are also published at [analytics.duggan
 
 ## 2026-11-07
 
-- **Detection rules corrected.** Five catalog rules did not do what they said: 007 (a keyword-count filter that never filtered), 011 (an `OR` that matched driver-service events from any index), 012 (a score filter equal to the lowest score), 016 (the file-creation clause was discarded by the final filter) and 017 (`=` where `==` belongs). Six Sigma thresholds written as quoted text are now numeric comparisons. If you copied these rules earlier, pull them again. Found by Matt Lucas at RedEye Security while translating the catalog for Caver.
+- **Detection rules corrected.** Five catalog rules did not do what they said: 007 (a keyword-count filter that never filtered), 011 (an `OR` that matched driver-service events from any index), 012 (a score filter equal to the lowest score, and an `OR` that escaped the `index=windows` scope, fixed later the same day), 016 (the file-creation clause was discarded by the final filter) and 017 (`=` where `==` belongs). Six Sigma thresholds written as quoted text are now numeric comparisons. If you copied these rules earlier, pull them again. Found by Matt Lucas at RedEye Security while translating the catalog for Caver.
 - **Detection rules: SQL over OCSF.** Every rule now has a `sql` field and `?format=sql` on the export route. The detection logic is tested; the OCSF mapping and the SQL dialect have not been run on a lakehouse engine.
 - **Caver** has an integration page: [Caver](/siem/caver/).
 
