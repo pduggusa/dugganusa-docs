@@ -231,7 +231,7 @@ curl -sS -H "Authorization: Bearer dugusa_YOUR_KEY" \
 }
 ```
 
-Free and Shield keys get `403` with `"error": "This endpoint requires professional+ tier"`.
+Free keys get `403` with `"error": "This endpoint requires professional+ tier"`.
 
 ## Similar documents (Pro and above)
 

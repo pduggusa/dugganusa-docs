@@ -122,7 +122,7 @@ Each refresh pulls two feed lanes (`ips.csv` and `domains.csv`), so it costs **2
 | Key | Suggested `IOC_REFRESH_MINUTES` | Queries per day, per data center |
 |---|---|---|
 | Free (10 per day) | `360` | 8 |
-| Shield (300 per day) or above | `60` | 48 |
+| Pro (2,000 per day) or above | `60` | 48 |
 
 With the default of 60 minutes, a Free key runs out of quota early in the day and the Worker keeps blocking on whatever list it last loaded, or on an empty list if no pull succeeded. The example config ships `360` for this reason. Plans and limits: [Plans](/account/plans/).
 

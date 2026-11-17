@@ -50,7 +50,7 @@ A plan for a Free key that leaves room for other use:
 | DNS blocklist | daily | 1 |
 | Suricata rules | daily | 1 |
 
-On Shield (300 per day) or above, hourly refresh of all three is fine. See [Plans](/account/plans/).
+On Pro (2,000 per day) or above, hourly refresh of all three is fine. See [Plans](/account/plans/).
 
 ## IP blocklist
 

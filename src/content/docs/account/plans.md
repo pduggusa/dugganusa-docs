@@ -1,6 +1,6 @@
 ---
 title: Plans and limits
-description: Daily query quotas, result caps and feature access for the Free, Shield, Pro and Enterprise plans, and the billing endpoints.
+description: Daily query quotas, result caps and feature access for the Free, Pro and Enterprise plans, and the billing endpoints.
 sidebar:
   order: 2
 ---
@@ -9,34 +9,33 @@ Prices, annual options and current offers: [analytics.dugganusa.com/pricing](htt
 
 ## Limits by plan
 
-| | Free | Shield | Pro | Enterprise |
-|---|---|---|---|---|
-| Queries per day | 10 | 300 | 2,000 | 50,000 |
-| Max results per `/api/v1/search` call | 20 | 50 | 500 | 1,000 |
-| Billing | none | monthly | monthly or annual | monthly or annual |
+| | Free | Pro | Enterprise |
+|---|---|---|---|
+| Queries per day | 10 | 2,000 | 50,000 |
+| Max results per `/api/v1/search` call | 20 | 500 | 1,000 |
+| Billing | none | monthly or annual | monthly or annual |
 
 Quotas reset at midnight UTC. Each keyed request to the feed, search, enrichment, rule generators or firewall lanes counts as one query; TAXII counts one per page. Checking your own usage (`/api/v1/api-keys/usage`, `/verify`) does not. See [Rate limits](/rate-limits/).
 
 ## Access by plan
 
-| | Free | Shield | Pro | Enterprise |
-|---|---|---|---|---|
-| Feed lanes: CSV, STIX 2.1, TAXII, MISP, packages | Yes | Yes | Yes | Yes |
-| Firewall lanes: OPNsense IP, Suricata and DNS lists | Yes | Yes | Yes | Yes |
-| Rule generators (YARA, Sigma, Suricata, bundle) | Yes | Yes | Yes | Yes |
-| Enrichment (`/api/v1/threat-intel/enrichment`) | Yes | Yes | Yes | Yes |
-| Search indexes | `iocs`, `blocked`, `pulses`, `content`, `epstein_files`, `the_finders` | Same as Free | All customer indexes | All customer indexes |
-| Several named indexes in one search | No | No | Yes | Yes |
-| Correlate and similar-document search | No | No | Yes | Yes |
-| Pattern analysis (`/api/v1/search/patterns/:index`) | No | No | No | Yes |
+| | Free | Pro | Enterprise |
+|---|---|---|---|
+| Feed lanes: CSV, STIX 2.1, TAXII, MISP, packages | Yes | Yes | Yes |
+| Firewall lanes: OPNsense IP, Suricata and DNS lists | Yes | Yes | Yes |
+| Rule generators (YARA, Sigma, Suricata, bundle) | Yes | Yes | Yes |
+| Enrichment (`/api/v1/threat-intel/enrichment`) | Yes | Yes | Yes |
+| Search indexes | `iocs`, `blocked`, `pulses`, `content`, `epstein_files`, `the_finders` | All customer indexes | All customer indexes |
+| Several named indexes in one search | No | Yes | Yes |
+| Correlate and similar-document search | No | Yes | Yes |
+| Pattern analysis (`/api/v1/search/patterns/:index`) | No | No | Yes |
 
 Free keys receive real-time feed data: the same indicators every other plan receives. Paid plans add volume and search access.
 
 Which plan fits:
 
 - **Free:** evaluation, a daily SIEM or firewall pull, a few manual searches.
-- **Shield:** [Edge Shield](/firewall/edge-shield/) on an hourly refresh, or several integrations polling a few times a day.
-- **Pro:** hourly polling of the full feed, full search and correlation.
+- **Pro:** hourly polling of the full feed, [Edge Shield](/firewall/edge-shield/) on an hourly refresh, several integrations, full search and correlation.
 - **Enterprise:** high-volume enrichment and automation.
 
 The full list of customer indexes is on [Search](/search/search/#plan-limits).
@@ -56,7 +55,6 @@ curl -sS https://analytics.dugganusa.com/api/v1/billing/prices
   "source_of_truth_url": "https://analytics.dugganusa.com/pricing",
   "tiers": {
     "free":       { "price": 0, "daily_limit": 10, "results": 20 },
-    "shield":     { "monthly": 24, "annual": null, "daily_limit": 300, "results": 50 },
     "pro":        { "monthly": 99, "annual": 948, "daily_limit": 2000, "results": 500 },
     "enterprise": { "monthly": 995, "annual": 9950, "daily_limit": 50000, "results": 1000 }
   },
@@ -105,8 +103,8 @@ curl -sS -X POST https://analytics.dugganusa.com/api/v1/billing/checkout \
 
 | Field | Meaning |
 |---|---|
-| `tier` | `shield`, `pro` or `enterprise` |
-| `interval` | `month` (default) or `year`. Shield is monthly only; `year` falls back to monthly |
+| `tier` | `pro` or `enterprise` |
+| `interval` | `month` (default) or `year` |
 | `email` | Optional for hosted checkout (Stripe collects it) |
 
 The response carries a Stripe Checkout `url` to open. The upgrade is applied to a key in this order:
